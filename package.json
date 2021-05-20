@@ -1,10 +1,14 @@
 {
   "name": "@nestjs/swagger",
-  "version": "4.8.0",
+  "version": "4.8.1-DAV",
   "description": "Nest - modern, fast, powerful node.js web framework (@swagger)",
   "author": "Kamil Mysliwiec",
   "license": "MIT",
   "repository": "https://github.com/nestjs/swagger",
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "format": "prettier \"lib/**/*.ts\" --write",

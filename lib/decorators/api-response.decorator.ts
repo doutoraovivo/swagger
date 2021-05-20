@@ -5,7 +5,7 @@ import { DECORATORS } from '../constants';
 import {
   ResponseObject,
   SchemaObject,
-  ReferenceObject
+  ReferenceObject, ExamplesObject
 } from '../interfaces/open-api-spec.interface';
 import { getTypeIsArrayTuple } from './helpers';
 
@@ -22,6 +22,7 @@ export interface ApiResponseSchemaHost
   schema: SchemaObject & Partial<ReferenceObject>;
   status?: number;
   description?: string;
+  examples?: ExamplesObject
 }
 
 export type ApiResponseOptions = ApiResponseMetadata | ApiResponseSchemaHost;

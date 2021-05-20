@@ -40,7 +40,9 @@ export class ResponseObjectMapper {
       return response;
     }
     const content = this.mimetypeContentWrapper.wrap(produces, {
-      schema: response.schema
+      schema: response.schema,
+      example: response?.example,
+      examples: response?.examples
     });
     return {
       ...omit(response, 'schema'),
