@@ -59,8 +59,7 @@ export class SwaggerExplorer {
   private operationIdFactory = (controllerKey: string, methodKey: string) =>
     controllerKey ? `${controllerKey}_${methodKey}` : methodKey;
 
-  constructor(private readonly schemaObjectFactory: SchemaObjectFactory) {
-  }
+  constructor(private readonly schemaObjectFactory: SchemaObjectFactory) {}
 
   public exploreController(
     wrapper: InstanceWrapper<Controller>,
@@ -125,8 +124,10 @@ export class SwaggerExplorer {
     const ctrlExtraModels = exploreGlobalApiExtraModelsMetadata(metatype);
     this.registerExtraModels(ctrlExtraModels);
 
-    const denormalizedPaths = this.metadataScanner.scanFromPrototype<any,
-      DenormalizedDoc>(instance, prototype, (name) => {
+    const denormalizedPaths = this.metadataScanner.scanFromPrototype<
+      any,
+      DenormalizedDoc
+    >(instance, prototype, (name) => {
       const targetCallback = prototype[name];
       const excludeEndpoint = exploreApiExcludeEndpointMetadata(
         instance,
@@ -347,10 +348,13 @@ export class SwaggerExplorer {
     let consumes = mergeAndUniq(classConsumes, methodConsumes);
     consumes = isEmpty(consumes) ? ['application/json'] : consumes;
 
-    const keysToRemove = ['schema', 'in', 'name', 'examples', 'example'];
+    const keysToRemove = ['schema', 'in', 'name', 'examples'];
     document.root.requestBody = {
       ...omit(requestBody, keysToRemove),
-      ...this.mimetypeContentWrapper.wrap(consumes, pick(requestBody, 'schema', 'examples', 'example'))
+      ...this.mimetypeContentWrapper.wrap(
+        consumes,
+        pick(requestBody, ['schema', 'examples'])
+      )
     };
     return document;
   }
